@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Website</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
 </head>
 
 <body>
     <nav>
-        <div class="Company-Name">Car Rental</div>
-        <div class="nav-links">
+        <div class="Company-Name">Car Rental System</div> <!-- Name of Project -->
+        <div class="nav-links"> <!-- all of the nav links in our home page-->
             <a href="#">Help</a>
             <a href="#">Admin</a>
             <a href="#">About</a>
@@ -19,11 +19,19 @@
             <a href="/login" class="login-button">Login</a>
         </div>
     </nav>
+
     <header class="banner">
+        <!--The car pitcure and welcome message that we see in the home page not sure if this needs to be a header-->
         <div class="banner-content">
             <h1>Welcome to our Car Rental System</h1>
         </div>
     </header>
+
+    <footer> <!--Footer with our group number and group memebers names -->
+        <p>Group 23</p>
+        <p> Group Memebers: Marc Mullaly, Sergio Tapia, Steven Santos</p>
+    </footer>
+
 </body>
 
 </html>
