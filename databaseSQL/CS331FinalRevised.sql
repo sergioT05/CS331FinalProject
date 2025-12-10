@@ -82,3 +82,12 @@ CREATE TABLE MAINTENANCE_RECORD (
 	PRIMARY KEY (MaintenanceID),
 	FOREIGN KEY(CarID) REFERENCES CAR(CarID)
 );
+
+
+
+INSERT INTO RENTAL_BRANCH (Street_Address, City, State, Zip_Code, ContactInformation)
+VALUES ('123 Market ST', 'Newark', 'NJ', '07102', '973-555-0101');
+
+INSERT INTO STAFF_MEMBER (S_FName, S_LName, Role, Salary, BranchID, Password)
+VALUES ('Super', 'Admin', 'Admin', 80000, 1, 'admin123');
+

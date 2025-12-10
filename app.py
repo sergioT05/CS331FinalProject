@@ -18,12 +18,75 @@ mysql.init_app(app)
 def Index():
     return render_template('index.html')
 
-@app.route('/login') #Cutstomer Login page
+@app.route('/login', methods=['GET', 'POST']) #Cutstomer Login page
 def Login():
+    error=None
+
+    if request.method=="POST":
+        email=request.form['email']
+        password=request.form['password']
+        
+        con=mysql.connect()
+        cur=con.cursor()
+        
+        cur.execute("SELECT * FROM `customer` WHERE `Email` = %s AND `Password` = %s", (email, password))   
+
+        data=cur.fetchone()
+        cur.close()
+        con.close()
+
+        if data:
+            user_info = {
+                'customerID': data[0],
+                'firstName': data[1],
+                'lastName': data[2],
+                'dob': data[3],
+                'phone': data[4],
+                'email': data[5],
+                'password': data[6],
+                'address': data[7],
+                'city': data[8],
+                'state': data[9],
+                'zipcode': data[10],
+                }
+            return render_template('dashboard.html', user=user_info)
+        else:
+            error = "Invalid Email or Password. Please try again or Register."
+            return render_template('login.html', error=error)
+
     return render_template('login.html')
 
-@app.route('/adminLogin')
+@app.route('/adminLogin', methods=['GET', 'POST'])
 def AdminLogin():
+    error=None
+    if request.method=="POST":
+        employeeID=request.form['employeeID']
+        password=request.form['password']
+
+        con=mysql.connect()
+        cur=con.cursor()
+
+        cur.execute("SELECT * FROM `staff_member` WHERE `EmployeeID` = %s AND `Password` = %s", (employeeID, password))
+
+        data=cur.fetchone()
+        cur.close()
+        con.close()
+
+        if data:
+            staff_info = {
+                'employeeID': data[0],
+                'firstName': data[1],
+                'lastName': data[2],
+                'role': data[3],
+                'Salary': data[4],
+                'BranchID': data[5], 
+                'password': data[6] 
+                }            
+            return render_template('adminDashboard.html', staff=staff_info)
+        else:
+            error = "Invalid Email or Password. Please try again or Register."
+            return render_template('adminLogin.html', error=error)
+
     return render_template('adminLogin.html')
 
 @app.route('/register', methods=['GET', 'POST'])
