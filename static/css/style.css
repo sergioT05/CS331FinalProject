@@ -164,3 +164,14 @@ footer {
 .styled-table tbody tr {
     border-bottom: 1px solid #1a2035; 
 }
+
+.dashboard-button{
+
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+    background-color: goldenrod; 
+    padding: 8px 20px;
+    border-radius: 20px; 
+}
