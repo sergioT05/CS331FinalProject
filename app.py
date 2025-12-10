@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect,url_for
+from flask import Flask, render_template, request, redirect,url_for, session
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
+
+app.secret_key = "12345ABCDE"
 
 mysql=MySQL()
 #config mysql with flask
@@ -36,25 +38,25 @@ def Login():
         con.close()
 
         if data:
-            user_info = {
-                'customerID': data[0],
-                'firstName': data[1],
-                'lastName': data[2],
-                'dob': data[3],
-                'phone': data[4],
-                'email': data[5],
-                'password': data[6],
-                'address': data[7],
-                'city': data[8],
-                'state': data[9],
-                'zipcode': data[10],
-                }
-            return render_template('dashboard.html', user=user_info)
+            session['logged_in'] = True
+            session['customerID']= data[0]
+            session['firstName']= data[1]
+            session['lastName']= data[2]
+            session['dob']= data[3]
+            session['phone']= data[4]
+            session['email']= data[5]
+            session['password']= data[6]
+            session['address']= data[7]
+            session['city']= data[8]
+            session['state']= data[9]
+            session['zipcode']= data[10]
+
+            return redirect(url_for('Dashboard'))
         else:
             error = "Invalid Email or Password. Please try again or Register."
             return render_template('login.html', error=error)
-
-    return render_template('login.html')
+    else:
+        return render_template('login.html')
 
 @app.route('/adminLogin', methods=['GET', 'POST'])
 def AdminLogin():
@@ -73,16 +75,16 @@ def AdminLogin():
         con.close()
 
         if data:
-            staff_info = {
-                'employeeID': data[0],
-                'firstName': data[1],
-                'lastName': data[2],
-                'role': data[3],
-                'Salary': data[4],
-                'BranchID': data[5], 
-                'password': data[6] 
-                }            
-            return render_template('adminDashboard.html', staff=staff_info)
+            session['logged_in'] = True
+            session['employeeID']= data[0]
+            session['firstName']= data[1]
+            session['lastName']= data[2]
+            session['role']= data[3]             
+            session['Salary']= data[4]
+            session['BranchID']= data[5] 
+            session['password']= data[6] 
+              
+            return redirect(url_for('AdminDashboard'))
         else:
             error = "Invalid Email or Password. Please try again or Register."
             return render_template('adminLogin.html', error=error)
@@ -119,11 +121,17 @@ def Register():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def Dashboard():
-    return render_template('dashboard.html')
+    if 'logged_in' in session:
+        return render_template('dashboard.html')
+    else:
+        return redirect(url_for('Login'))
 
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 def AdminDashboard():
-    return render_template('adminDashboard.html')
+    if 'logged_in' in session:
+        return render_template('adminDashboard.html')
+    else:
+        return redirect(url_for('AdminLogin'))
 
 if __name__ == "__main__":
-    app.run(debug=True) #runs server in debug mods
+    app.run(debug=True) #runs server in debug mode
