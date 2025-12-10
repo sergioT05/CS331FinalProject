@@ -17,6 +17,11 @@ Group Memebers: Marc Mullaly, Sergio Tapia, Steven Santos
 - here make a database called "car_rental_db"
 - import the sql file from databaseSQL folder in this repo
 
+#### Resources to help setup
+These are the videos I used to help me get started
+
+- https://www.youtube.com/watch?v=vlvXz1KDtB8&t=43s
+-https://www.youtube.com/watch?v=o3bCVqF9gI0
 
 ### How to Use:
 - go to the app.py file and run the file
@@ -26,3 +31,22 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Running on http://127.0.0.1:5000
 
 - click on that link and it should bring you to the homepage
+
+
+### Admin Login
+use this to test the admin's view
+- Employee ID: 1
+- Password: admin123
+
+### Features
+User Registration & Login
+
+User Profile Display 
+
+Car Inventory Search
+
+Car Reservation System
+
+Admin User list
+
+Admin Transactions (Unfinished)
