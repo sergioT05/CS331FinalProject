@@ -47,13 +47,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for rent in rentals %}
+                        {% for rental in rentals %}
                         <tr>
-                            <td>{{ rent.car_name }}</td>
-                            <td>{{ rent.plate }}</td>
-                            <td>{{ rent.start }}</td>
-                            <td>{{ rent.end }}</td>
-                            <td>${{ rent.cost }}</td>
+                            <td>{{ rental.car_name }}</td>
+                            <td>{{ rental.plate }}</td>
+                            <td>{{ rental.start }}</td>
+                            <td>{{ rental.end }}</td>
+                            <td>${{ rental.cost }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
