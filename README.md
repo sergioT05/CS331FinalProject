@@ -39,14 +39,14 @@ use this to test the admin's view
 - Password: admin123
 
 ### Features
-User Registration & Login
+- User Registration & Login
 
-User Profile Display 
+- User Profile Display 
 
-Car Inventory Search
+- Car Inventory Search
 
-Car Reservation System
+- Car Reservation System
 
-Admin User list
+- Admin User list
 
-Admin Transactions (Unfinished)
+- Admin Transactions List (Unfinished)
