@@ -32,7 +32,7 @@ nav {
     border-radius: 20px; 
 }
 
-.search-button {
+.admin-buttom {
     border: 2px solid white;
     padding: 8px 20px;
     border-radius: 20px;
@@ -56,10 +56,11 @@ nav {
 }
 
 .login-container {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 50px 0;
 }
 
 .login-form {
@@ -111,4 +112,11 @@ footer {
     min-height: 100%;
     text-align: center;
     padding: 5px;
+}
+
+.dashboardMessage{
+    display: flex;             
+    justify-content: center;    
+    text-align: center;
+    padding-top: 100px;      
 }

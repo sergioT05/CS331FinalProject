@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
@@ -16,18 +16,16 @@
                 <a href="/">Home</a> <!--Links us back to home page-->
             </div>
         </nav>
-        <form action="/dashboard" method="POST" class="login-form"> <!--Login form, using post since most secure-->
-            <h2>Welcome Back</h2>
+        <form action="/adminDashboard" method="POST" class="login-form"> <!--Login form, using post since most secure-->
+            <h2>Welcome</h2>
 
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+            <label>Employee ID</label>
+            <input type="number" name="employeeID" placeholder="Enter your employee ID" required>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter password" required>
 
             <button type="submit">Login</button>
-
-            <p>Don't have an account? <a href="{{ url_for('Register') }}">Register</a></p>
         </form>
     </div>
 </body>

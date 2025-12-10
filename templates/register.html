@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="login-container">
+        <nav>
+            <div class="nav-links">
+                <a href="/">Home</a> <!--Links us back to home page-->
+            </div>
+        </nav>
+        <form action="" method="POST" class="login-form"> <!--Login form, using post since most secure-->
+            <h2>Thanks for Registering!</h2>
+
+            <label>Driver’s license number or National ID</label>
+            <input type="number" name="customerID" placeholder="Enter CustomerID" required>
+
+            <label>First Name</label>
+            <input type="text" name="firstName" placeholder="Enter your first name" required>
+
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Enter your last name" required>
+
+            <label>Phone Number</label>
+            <input type="tel" name="phoneNum" placeholder="Enter Phone number">
+
+            <label>Date of Birth</label>
+            <input type="date" name="DOB" placeholder="Enter your Date of Birth">
+
+            <label>Street Address</label>
+            <input type="text" name="address" placeholder="Enter your Street Address">
+
+            <label>State</label>
+            <input type="text" name="state" placeholder="Enter your State">
+
+            <label>City</label>
+            <input type="text" name="city" placeholder="Enter City Name">
+
+            <label>ZipCode</label>
+            <input type="number" name="zipcode" placeholder="Enter ZipCode">
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+
+</html>
