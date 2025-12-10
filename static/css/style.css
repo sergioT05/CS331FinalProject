@@ -130,10 +130,11 @@ footer {
 }
 
 .table-container {
-    padding: 50px;
+    padding: 25px;
     max-width: 1000px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
+
 
 .table-title {
     text-align: center;
@@ -147,8 +148,9 @@ footer {
     background-color: #243046; 
     color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden; 
+
 }
 
 .styled-table thead tr {
@@ -221,4 +223,36 @@ footer {
     text-decoration: none;
     border-radius: 20px;
     display: inline-block;
+}
+
+.table-container,
+.dashboard-container {
+    max-width: 1200px; 
+    margin: 0 auto;    
+    padding: 40px;     
+    padding-top: 120px; 
+}
+
+.table-container {
+    overflow-x: auto; 
+}
+
+.dashboard-container h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.profile-section, 
+.rental-section {
+    background-color: #243046; 
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 40px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.dashboard-button {
+    text-align: center;
+    margin-bottom: 40px;
 }

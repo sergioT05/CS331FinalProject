@@ -123,6 +123,42 @@ def Register():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def Dashboard():
     if 'Clogged_in' in session:
+        customer_id = session['customerID']
+        
+        con = mysql.connect()
+        cur = con.cursor()
+
+        cur.execute("SELECT * FROM CUSTOMER WHERE CustomerID = %s", (customer_id,))
+        user_data = cur.fetchone()
+
+        cur.execute("SELECT RENTAL_AGREEMENT.Rental_ID, RENTAL_AGREEMENT.Start_Date, RENTAL_AGREEMENT.End_Date, RENTAL_AGREEMENT.TotalCost, CAR.Brand, CAR.Model, CAR.LicensePlateNumber FROM RENTAL_AGREEMENT JOIN CAR ON RENTAL_AGREEMENT.CarID = CAR.CarID WHERE RENTAL_AGREEMENT.CustomerID = %s", (customer_id,))
+        rental_data= cur.fetchall()
+
+        cur.close()
+        con.close()
+
+        my_rentals = []
+        for row in rental_data:
+            rental = {
+                'id': row[0],
+                'start': row[1],
+                'end': row[2],
+                'cost': row[3],
+                'car_name': f"{row[4]} {row[5]}", 
+                'plate': row[6]
+            }
+            my_rentals.append(rental)
+            
+        user_profile = {
+            'firstName': user_data[1],
+            'lastName': user_data[2],
+            'email': user_data[5],
+            'phone': user_data[4],
+            'address': f"{user_data[7]}, {user_data[8]}, {user_data[9]}"
+        }
+
+        return render_template('dashboard.html', profile=user_profile, rentals=my_rentals)
+
         return render_template('dashboard.html')
     else:
         return redirect(url_for('Login'))
