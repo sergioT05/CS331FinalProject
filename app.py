@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect,url_for, session
 from flaskext.mysql import MySQL
+from datetime import date, datetime
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def Login():
         con=mysql.connect()
         cur=con.cursor()
         
-        cur.execute("SELECT * FROM `customer` WHERE `Email` = %s AND `Password` = %s", (email, password))   
+        cur.execute("SELECT * FROM customer WHERE Email = %s AND Password = %s", (email, password))   
 
         data=cur.fetchone()
         cur.close()
@@ -68,7 +69,7 @@ def AdminLogin():
         con=mysql.connect()
         cur=con.cursor()
 
-        cur.execute("SELECT * FROM `staff_member` WHERE `EmployeeID` = %s AND `Password` = %s", (employeeID, password))
+        cur.execute("SELECT * FROM staff_member WHERE EmployeeID = %s AND Password = %s", (employeeID, password))
 
         data=cur.fetchone()
         cur.close()
@@ -109,7 +110,7 @@ def Register():
         con=mysql.connect()
         cur=con.cursor()
     
-        cur.execute("INSERT INTO `customer`(`CustomerID`, `C_FName`, `C_LName`, `DateOfBirth`, `Phone`, `Email`, `Password`, `Street_Address`, `City`, `State`, `Zip_Code`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (customerID, firstName, lastName, dob, phoneNum, email, password, address, city, state, zipcode))
+        cur.execute("INSERT INTO customer(CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (customerID, firstName, lastName, dob, phoneNum, email, password, address, city, state, zipcode))
         con.commit()
 
         cur.close()
@@ -183,13 +184,13 @@ def AvailableCars():
         con = mysql.connect()
         cur = con.cursor()
         
-        cur.execute("SELECT * FROM `car` WHERE `RentalStatus` = 'available'")
-        raw_data = cur.fetchall()
+        cur.execute("SELECT * FROM car WHERE RentalStatus = 'available'")
+        data = cur.fetchall()
         cur.close()
         con.close()
         
         cars_list = []
-        for row in raw_data:
+        for row in data:
             car_dict = {
                 'carID': row[0],
                 'plate': row[1],
@@ -205,6 +206,62 @@ def AvailableCars():
         return render_template('cars.html', cars=cars_list)
     else:
         return redirect(url_for('Login'))
+    
 
+
+@app.route('/rent/<int:car_id>', methods=['GET', 'POST'])
+def RentCar(car_id):
+    if 'Clogged_in' in session:
+        con = mysql.connect()
+        cur = con.cursor()
+
+        cur.execute("SELECT * FROM CAR WHERE CarID = %s", (car_id,))
+        car_data = cur.fetchone()
+        
+        car_obj = {
+            'carID': car_data[0],
+            'plate': car_data[1],
+            'model': car_data[2],
+            'brand': car_data[3],
+            'category': car_data[4]
+        }
+        
+        daily_rate = 60
+
+        if request.method == 'POST':
+            startDay_String = request.form['startDate']
+            endDay_String = request.form['endDate']
+            customer_id = session['customerID']
+
+            
+            d1 = datetime.strptime(startDay_String, "%Y-%m-%d")
+            d2 = datetime.strptime(endDay_String, "%Y-%m-%d")
+            delta = d2 - d1
+            days = delta.days
+            
+            if days <= 0:
+                error = "End date must be after start date!"
+                return render_template('rentCar.html',car=car_obj, rate=daily_rate, error=error)           
+             
+            daily_rate=100
+            total_cost = days * daily_rate
+
+            cur.execute("INSERT INTO RENTAL_AGREEMENT(Start_Date, End_Date, DailyRate, TotalCost, CustomerID, CarID) VALUES (%s, %s, %s, %s, %s, %s)", (startDay_String, endDay_String, daily_rate, total_cost, customer_id, car_id))
+            
+            cur.execute("UPDATE CAR SET RentalStatus = 'rented' WHERE CarID = %s", (car_id,))
+            con.commit()
+                
+            cur.close()
+            con.close()
+            
+            return redirect(url_for('Dashboard'))
+        
+        cur.close()
+        con.close()
+        return render_template('rentCar.html', car=car_obj, rate=daily_rate)
+    
+    else:
+        return redirect(url_for('Login'))
+    
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Car</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
+</head>
+
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="/cars">Back to Cars</a>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <form action="{{ url_for('RentCar', car_id=car.carID) }}" method="POST" class="login-form">
+            <h2>{{ car.brand }} {{ car.model }}</h2>
+
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <p>
+
+            <p>
+                Daily Rate: ${{ rate }}/day
+            </p>
+
+            <label>Start Date</label>
+            <input type="date" name="startDate" required>
+
+            <label>End Date</label>
+            <input type="date" name="endDate" required>
+
+            <button type="submit">Confirm Rental</button>
+        </form>
+    </div>
+</body>
+
+</html>
