@@ -195,14 +195,6 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.car-image-box {
-    height: 150px;
-    background-color: #242f46;
-    display: flex;
-    justify-content: center;    
-    align-items: center;
-    color: white;
-}
 
 .car-info {
     padding: 20px;
@@ -211,7 +203,7 @@ footer {
 }
 
 .status {
-    color: #4cd137; 
+    color: black; 
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -255,4 +247,19 @@ footer {
 .dashboard-button {
     text-align: center;
     margin-bottom: 40px;
+}
+
+.dashboard-button-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.disabled-btn {
+    background-color: #57606f; /* Grey color */
+    color: #ccc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: not-allowed; /* Shows a 'stop' symbol on mouse hover */
+    font-weight: bold;
 }

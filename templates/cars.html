@@ -18,24 +18,31 @@
     </nav>
 
 
-    <div class="container">
+    <div class="dashboard-container">
         <h1>Rent a Car!</h1>
 
         <div class="car-grid">
 
             {% for car in cars %}
             <div class="car-card">
-                <div class="car-image-box">
-                    <h3>{{ car.brand }} Picture</h3>
-                </div>
-
                 <div class="car-info">
                     <h2>{{ car.brand }} {{ car.model }}</h2>
                     <p>Year: {{ car.year }}</p>
                     <p>Type: {{ car.category }}</p>
-                    <p class="status">{{ car.status }}</p>
+                    <p>Branch Location: {{ car.location}} </p>
 
-                    <a href="{{ url_for('RentCar', car_id=car.carID) }}" class=" rent-button">Rent Now</a>
+                    <p class="status">Status: {{ car.status }}</p>
+
+                    {% if car.status.lower() == 'available' %}
+                    <a href="{{ url_for('RentCar', car_id=car.carID) }}" class="rent-button">Rent Now</a>
+
+                    {% elif car.status.lower()=='rented' %}
+                    <button class="disabled-btn" disabled>Rented</button>
+
+                    {% elif car.status.lower()=='under maintenance' %}
+                    <button class="disabled-btn" disabled>Under Maintenance</button>
+
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

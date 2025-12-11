@@ -220,7 +220,7 @@ def AvailableCars():
         con = mysql.connect()
         cur = con.cursor()
         
-        cur.execute("SELECT * FROM car WHERE RentalStatus = 'available'")
+        cur.execute("SELECT CAR.CarID, CAR.LicensePlateNumber, CAR.Model, CAR.Brand, CAR.Category, CAR.YearOfManufacture, CAR.RentalStatus,RENTAL_BRANCH.City, RENTAL_BRANCH.State, RENTAL_BRANCH.Zip_Code, RENTAL_BRANCH.Street_Address FROM CAR JOIN RENTAL_BRANCH ON CAR.BranchID = RENTAL_BRANCH.BranchID")
         data = cur.fetchall()
         cur.close()
         con.close()
@@ -235,6 +235,7 @@ def AvailableCars():
                 'category': row[4],
                 'year': row[5],
                 'status': row[6],
+                'location': f" {row[10]}, {row[7]}, {row[8]} {row[9]}"
             }
 
             cars_list.append(car_dict)
@@ -279,7 +280,6 @@ def RentCar(car_id):
                 error = "End date must be after start date!"
                 return render_template('rentCar.html',car=car_obj, rate=daily_rate, error=error)           
              
-            daily_rate=100
             total_cost = days * daily_rate
 
             cur.execute("INSERT INTO RENTAL_AGREEMENT(Start_Date, End_Date, DailyRate, TotalCost, CustomerID, CarID) VALUES (%s, %s, %s, %s, %s, %s)", (startDay_String, endDay_String, daily_rate, total_cost, customer_id, car_id))
