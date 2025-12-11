@@ -55,13 +55,5 @@ use this to test customer's view
 - Admin User list
 
 - Admin Transactions List
-
-#### Small Note
-- We're all new to flask and web dev in general. So theres
-are prob some bugs and ways to "hack" the website. 
-Also, there are things here that arent neccesary good practice like password not being encrypted. Prof said
-that future students might be using these in future projects, so I would like to wish you all Good Luck!
-Hopefully, this is helps someone! 
-    
 \
 Thanks!!
