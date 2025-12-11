@@ -20,7 +20,20 @@
 
     <div class="dashboard-container">
         <h1>Rent a Car!</h1>
-
+         <form action="/cars" method="GET">
+             <input type="search" name="search" placeholder="Search for car" value="{{ request.args.get('search', '') }}">
+             <label>
+                 <input type="checkbox" name="status" value="available" {% if 'available' in request.args.getlist('status') %}checked{% endif %}> Available
+             </label>
+             <label>
+                 <input type="checkbox" name="status" value="rented" {% if 'rented' in request.args.getlist('status') %}checked{% endif %}> Rented
+             </label>
+             <label>
+                 <input type="checkbox" name="status" value="under maintenance" {% if 'under maintenance' in request.args.getlist('status') %}checked{% endif %}> Under Maintenance
+             </label>
+             <button type="submit">Search</button>
+         </form>
+        
         <div class="car-grid">
 
             {% for car in cars %}
