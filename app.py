@@ -21,6 +21,14 @@ mysql.init_app(app)
 def Index():
     return render_template('index.html')
 
+@app.route('/help')
+def Help():
+    return render_template('help.html')
+
+@app.route('/about')
+def About():
+    return render_template('about.html')
+
 @app.route('/login', methods=['GET', 'POST']) #Cutstomer Login page
 def Login():
     error=None
@@ -308,7 +316,7 @@ def RentCar(car_id):
             'category': car_data[4]
         }
         
-        daily_rate = 60
+        daily_rate = 100
 
         if request.method == 'POST':
             startDay_String = request.form['startDate']

@@ -149,7 +149,26 @@ INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, 
  VALUES ('MNT-201', 'Wrangler', 'Jeep', 'SUV', 2021, 'under maintenance', 1);
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
  VALUES ('MNT-202', '911 Carrera', 'Porsche', 'Coupe', 2022, 'under maintenance', 1);
-
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('PQR-111', 'Civic Type R', 'Honda', 'Hatchback', 2023, 'available', 2);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('PQR-222', 'Rogue', 'Nissan', 'SUV', 2022, 'available', 3);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('PQR-333', 'F-150', 'Ford', 'Truck', 2024, 'available', 4);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('PQR-444', 'Silverado', 'Chevrolet', 'Truck', 2023, 'rented', 5);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('PQR-555', 'Prius', 'Toyota', 'Hybrid', 2022, 'available', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('STU-666', 'Model X', 'Tesla', 'SUV', 2023, 'under maintenance', 2);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('STU-777', 'Escalade', 'Cadillac', 'SUV', 2024, 'rented', 3);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('STU-888', 'Charger', 'Dodge', 'Sedan', 2021, 'available', 4);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('STU-999', 'Odyssey', 'Honda', 'Minivan', 2022, 'available', 5);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('VWX-000', 'G-Class', 'Mercedes', 'SUV', 2023, 'rented', 1);
 
 
 INSERT INTO CUSTOMER(CustomerID, C_FName,C_LName,DateOfBirth,Phone,Email,Password,Street_Address, City,State, Zip_Code) 

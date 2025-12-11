@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
+
+</head>
+
+<body>
+    <nav>
+        <div class="nav-links"> <!-- all of the nav links in our home page-->
+            <a href="/">Back Home</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h1>How to Use</h1>
+
+        <div class="profile-section">
+            <h2>For Customers</h2>
+            <div class="profile-card">
+                <p><strong>1. Register:</strong> Create a new account using the Registration page.</p>
+                <p><strong>2. Browse:</strong> Login and click "View Cars" to view our cars.</p>
+                <p><strong>3. Search:</strong> Use the search bar to find SUVs, Sedans, Available cars, etc.</p>
+                <p><strong>4. Book:</strong> Click "Rent Now" on an available vehicle and select your dates.</p>
+                <p><strong>5. History:</strong> View your reservations on your Dashboard.</p>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <h2>For Administrators</h2>
+            <div class="profile-card">
+                <p><strong>Login:</strong> Use your Employee ID (1 for admin) and password.</p>
+                <p><strong>User List:</strong> View all registered customers in the system.</p>
+                <p><strong>Transactions:</strong> View a master list of all rentals, dates, and total costs.</p>
+            </div>
+        </div>
+    </div>s
+</body>
+
+</html>
