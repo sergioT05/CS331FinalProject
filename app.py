@@ -207,7 +207,7 @@ def AdminUsers():
     else:
         return redirect(url_for('AdminLogin'))
     
-@app.route('/admin/transcationsList')
+@app.route('/admin/transactionsList')
 def AdminTransactions():
     role = session.get('role')
     if 'Alogged_in' in session and role and role.lower() == 'admin': 
