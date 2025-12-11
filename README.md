@@ -38,6 +38,11 @@ use this to test the admin's view
 - Employee ID: 1
 - Password: admin123
 
+### Customer Login
+use this to test customer's view
+email: keanu.reeves@email.com
+password: matrix
+
 ### Features
 - User Registration & Login
 
@@ -49,4 +54,4 @@ use this to test the admin's view
 
 - Admin User list
 
-- Admin Transactions List (Unfinished)
+- Admin Transactions List

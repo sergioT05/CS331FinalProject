@@ -101,6 +101,8 @@ INSERT INTO STAFF_MEMBER (S_FName, S_LName, Role, Salary, BranchID, Password)
 VALUES ('Super', 'Admin', 'Admin', 80000, 1, 'admin123');
 
 
+
+
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
  VALUES ('ABC-123', 'IS500', 'Lexus', 'Sedan', 2022, 'rented', 1);
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
@@ -150,3 +152,5 @@ INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, 
 
 
 
+INSERT INTO CUSTOMER(CustomerID, C_FName,C_LName,DateOfBirth,Phone,Email,Password,Street_Address, City,State, Zip_Code) 
+VALUES ('987651','Keanu', 'Reeves', '1964-09-02', '555-1005', 'keanu.reeves@email.com', 'matrix', '654 Cedar Td', 'Hollywood', 'CA', '90028');
