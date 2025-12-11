@@ -239,12 +239,6 @@ def AdminTransactions():
         return redirect(url_for('AdminLogin'))
 
 
-@app.route('/logout')
-def Logout():
-    session.clear()
-    
-    return redirect(url_for('Index'))
-
 @app.route('/cars')
 def AvailableCars():
     if 'Clogged_in' in session:
@@ -252,7 +246,28 @@ def AvailableCars():
         con = mysql.connect()
         cur = con.cursor()
         
-        cur.execute("SELECT CAR.CarID, CAR.LicensePlateNumber, CAR.Model, CAR.Brand, CAR.Category, CAR.YearOfManufacture, CAR.RentalStatus,RENTAL_BRANCH.City, RENTAL_BRANCH.State, RENTAL_BRANCH.Zip_Code, RENTAL_BRANCH.Street_Address FROM CAR JOIN RENTAL_BRANCH ON CAR.BranchID = RENTAL_BRANCH.BranchID")
+        search = request.args.get('search', '')
+        selected_status =  request.args.getlist('status')
+
+        query = "SELECT CAR.CarID, CAR.LicensePlateNumber, CAR.Model, CAR.Brand, CAR.Category, CAR.YearOfManufacture, CAR.RentalStatus,RENTAL_BRANCH.City, RENTAL_BRANCH.State, RENTAL_BRANCH.Zip_Code, RENTAL_BRANCH.Street_Address FROM CAR JOIN RENTAL_BRANCH ON CAR.BranchID = RENTAL_BRANCH.BranchID"
+
+        conditions = []
+        parameters = []
+
+        if search:
+            like = f"%{search}%"
+            conditions.append("(CAR.Brand LIKE %s OR CAR.Model LIKE %s OR CAR.Category LIKE %s OR CAR.YearOfManufacture LIKE %s)")
+            parameters.extend([like, like, like, like])
+
+        if selected_status:
+            t = ",".join(["%s"] * len(selected_status))
+            conditions.append(f"CAR.RentalStatus IN ({t})")
+            parameters.extend(selected_status)
+
+        if conditions: 
+            query += " WHERE " + " AND ".join(conditions)
+
+        cur.execute(query, parameters)
         data = cur.fetchall()
         cur.close()
         con.close()
@@ -275,8 +290,6 @@ def AvailableCars():
         return render_template('cars.html', cars=cars_list)
     else:
         return redirect(url_for('Login'))
-    
-
 
 @app.route('/rent/<int:car_id>', methods=['GET', 'POST'])
 def RentCar(car_id):
