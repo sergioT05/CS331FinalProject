@@ -40,8 +40,8 @@ use this to test the admin's view
 
 ### Customer Login
 use this to test customer's view
-email: keanu.reeves@email.com
-password: matrix
+- email: keanu.reeves@email.com
+- password: matrix
 
 ### Features
 - User Registration & Login
