@@ -12,17 +12,19 @@
 <body>
     <nav>
         <div class="nav-links">
+            <a href="/">Home</a> <!--Links us back to home page-->
             <a href="/logout">Logout</a>
 
         </div>
     </nav>
 
-    <div class="dashboard-container">
+    <div class="dashboardMessage">
         <h1>Welcome, {{ session['lastName'] }}!</h1>
-        <div class=" dashboard-button-container">
-            <a href="/admin/users" class="dashboard-button">View All Users</a>
-            <a href="/admin/transactionsList" class="dashboard-button"> View All Transactions</a>
-        </div>
+    </div>
+
+    <div>
+        <a href="/admin/users" class="dashboard-button">View All Users</a>
+    </div>
 </body>
 
 </html>

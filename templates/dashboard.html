@@ -12,15 +12,14 @@
 <body>
     <nav>
         <div class="nav-links">
-            <a href="/logout">Logout</a>
+            <a href="/">Home</a> <!--Links us back to home page-->
         </div>
     </nav>
-
     <div class="dashboard-container">
         <h1>Welcome, {{ profile.firstName }}!</h1>
-        <div class=" dashboard-button-container">
-            <a href="/cars" class="dashboard-button">View Cars</a>
-            <!--<a href="#" class="dashboard-button"> Make Payment</a> -->
+        <div>
+            <a href="/cars" class="dashboard-button">View Available Cars</a>
+            <a href="/payment" class="dashboard-button">Make A Payment</a>
         </div>
         <div class="profile-section">
             <h2>My Profile</h2>
@@ -48,13 +47,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for rental in rentals %}
+                        {% for rent in rentals %}
                         <tr>
-                            <td>{{ rental.car_name }}</td>
-                            <td>{{ rental.plate }}</td>
-                            <td>{{ rental.start }}</td>
-                            <td>{{ rental.end }}</td>
-                            <td>${{ rental.cost }}</td>
+                            <td>{{ rent.car_name }}</td>
+                            <td>{{ rent.plate }}</td>
+                            <td>{{ rent.start }}</td>
+                            <td>{{ rent.end }}</td>
+                            <td>${{ rent.cost }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

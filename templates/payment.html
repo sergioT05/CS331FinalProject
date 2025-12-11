@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    {% if show %}
+    <div class="pop", style="visibility: visible;">
+        <strong>Payment Successful</strong>
+    </div>
+    {% endif %}
+    <div class="payment-container">
+        <nav>
+            <div class="nav-links">
+                <a href="/home">Home</a> <!--Links us back to home page-->
+                <a href="/dashboard">Dashboard</a>
+            </div>
+        </nav>
+        <form action="/payment" method="POST" class="payment-form"> <!--Login form, using post since most secure-->
+            <h2>Make A Payment</h2>
+            
+            {% if not method %}
+            <label class="payment-option">
+                <input type="radio" name="method" value="card" {% if method == "card" %}checked{% endif %}>
+                <span>Credit/Debit Card</span>
+            </label>
+
+            <label class="payment-option">
+                <input type="radio" name="method" value="transfer" {% if method == "transfer" %}checked{% endif %}>
+                <span>Online Transfer</span>
+            </label>
+
+            <label class="payment-option">
+                <input type="radio" name="method" value="cash" {% if method == "cash" %}checked{% endif %}>
+                <span>Cash</span>
+            </label>
+
+            <button type="submit">Continue</button>
+            {% endif %}
+
+            {% if method == "card" %}
+            <div class="payment-details">
+                <h3>Credit/Debit Card Payment</h3>
+                <input type="hidden" name="method" value="card">
+
+                <label>Rental ID</label>
+                <input type="rentalID" name="rentalID" placeholder="Enter your Rental ID" >
+
+                <label>Amount</label>
+                <input type="amount" name="amount" placeholder="Enter amount">
+
+                <label>Card Number</label>
+                <input type="text" name="card_number">
+
+                <label>Expiration</label>
+                <input type="text" name="exp">
+
+                <label>CVC</label>
+                <input type="text" name="cvc">
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" name="action" value="pay">Pay Now</button>
+                    <button type="submit" name="action" value="back" style="margin-left: 10px;">Back</button>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if method == "transfer" %}
+            <div class="payment-details">
+                <h3>Direct Transfer Payment</h3>
+                <input type="hidden" name="method" value="transfer">
+
+                <label>Rental ID</label>
+                <input type="rentalID" name="rentalID" placeholder="Enter your Rental ID" >
+
+                <label>Amount</label>
+                <input type="amount" name="amount" placeholder="Enter amount">
+
+                <label>Banking Num</label>
+                <input type="text" name="Banking Number">
+
+                <label>Routing Num</label>
+                <input type="text" name="Routing Number">
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" name="action" value="pay">Pay Now</button>
+                    <button type="submit" name="action" value="back" style="margin-left: 10px;">Back</button>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if method == "cash" %}
+            <div class="payment-details">
+                <h3>Cash Payment(Pay on Arrival)</h3>
+                <input type="hidden" name="method" value="cash">
+
+                <label>Rental ID</label>
+                <input type="rentalID" name="rentalID" placeholder="Enter your Rental ID">
+
+                <label>Amount</label>
+                <input type="amount" name="amount" placeholder="Enter amount">
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" name="action" value="pay">Pay Now</button>
+                    <button type="submit" name="action" value="back" style="margin-left: 10px;">Back</button>
+                </div>
+            </div>
+            {% endif %}
+
+        </form>
+    </div>
+</body>
+
+</html>

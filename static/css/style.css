@@ -39,11 +39,12 @@ nav {
 }
 
 .banner {
-    height: 80vh;
+    height: 70vh;
     background-image: 
     linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0)),
     url('/static/images/damien-creatz-navtPflashE-unsplash.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 
     display: flex;             
@@ -52,9 +53,6 @@ nav {
     text-align: center;
 
     padding-bottom: 400px;
-}
-.banner-content{
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.7); 
 }
 
 .login-container {
@@ -111,13 +109,9 @@ nav {
 }
 
 footer {
-    background-color: #1a2035;
-    color: white;
+    min-height: 100%;
     text-align: center;
-    padding: 30px 10px;
-    font-size: 30px; 
-    margin-top: 5px; 
-    opacity: 0.7;
+    padding: 5px;
 }
 
 .dashboardMessage{
@@ -167,7 +161,6 @@ footer {
 .styled-table th, 
 .styled-table td {
     padding: 12px 15px;
-    text-align: center;
 }
 
 .styled-table tbody tr {
@@ -202,6 +195,14 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+.car-image-box {
+    height: 150px;
+    background-color: #242f46;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    color: white;
+}
 
 .car-info {
     padding: 20px;
@@ -210,7 +211,7 @@ footer {
 }
 
 .status {
-    color: black; 
+    color: #4cd137; 
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -251,69 +252,128 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.profile-section p{
-    padding: 5px;
-}
 .dashboard-button {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.dashboard-button-container {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.disabled-button {
-    background-color: #57606f; 
-    color: #ccc;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    cursor: not-allowed; 
-    font-weight: bold;
-}
-
-.search-container {
-    background-color: #293650;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 30px;
+/*added by sergio for payment screen(recycled login form)*/
+.payment-container {
+    min-height: 100vh;
     display: flex;
-    gap: 15px;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 50px 0;
 }
 
-.search-container input[type="search"] {
-    padding: 10px;
-    border-radius: 5px;
-    flex-grow: 1; 
+.payment-form {
+    background-color: #243046;
+    padding: 40px;
+    border-radius: 10px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
 }
 
-.search-container label {
+.payment-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
     color: white;
-    font-weight: bold;
-    margin-right: 10px;
-    cursor: pointer;
 }
 
-.search-container button {
+.payment-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1a2035; 
+    color: white;
+}
+
+.payment-form button {
     background-color: goldenrod;
     color: white;
+    padding: 10px;
     border: none;
-    padding: 10px 25px;
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-}
-
-.profile-card ul{
-    list-style: none;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-.profile-card li {
+.payment-form label {
     margin-bottom: 10px;
+}
+
+.payment-form p a {
+    color: white;
+}
+
+.payment-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-note {
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.card-icons img {
+    width: 40px;
+    margin-left: 5px;
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+    background: #243046;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.pop {
+    visibility: hidden;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #243046;
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    font: sans-serif;
+    max-width: 400px;
+    justify-content: right bottom;
+
+    animation: HP 3s forwards;
+}
+
+@keyframes HP {
+    0%, 99%{
+        visibility: visible;
+        opacity: 1;
+    }
+    100%{
+        visibility: hidden;
+        opacity: 0;
+    }
 }

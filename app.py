@@ -1,3 +1,4 @@
+import random
 from flask import Flask, render_template, request, redirect,url_for, session
 from flaskext.mysql import MySQL
 from datetime import date, datetime
@@ -20,14 +21,6 @@ mysql.init_app(app)
 @app.route('/') #homepage 
 def Index():
     return render_template('index.html')
-
-@app.route('/help')
-def Help():
-    return render_template('help.html')
-
-@app.route('/about')
-def About():
-    return render_template('about.html')
 
 @app.route('/login', methods=['GET', 'POST']) #Cutstomer Login page
 def Login():
@@ -66,6 +59,33 @@ def Login():
             return render_template('login.html', error=error)
     else:
         return render_template('login.html')
+
+@app.route('/payment', methods=['GET', 'POST']) #payment page
+def Payment():
+    method=None
+    show=False
+    if request.method == "POST":
+        if 'action' in request.form:
+            if request.form['action'] == 'back':
+                method = None
+            elif request.form['action'] == 'pay':
+                con=mysql.connect()
+                cur=con.cursor()
+                method = request.form.get(method)
+                Rental_ID = request.form.get('rentalID')
+                Amount = request.form.get('amount')
+                PDate = date.today()
+            
+                cur.execute("INSERT INTO payment(PDate, Amount, Method, Rental_ID) VALUES (%s, %s, %s, %s)", (PDate, Amount, method, Rental_ID))
+                con.commit()
+
+                cur.close()
+                con.close()
+                show=True
+                return render_template('payment.html', show=show)
+        elif 'method' in request.form:
+            method = request.form['method']
+    return render_template('payment.html', method=method)
 
 @app.route('/adminLogin', methods=['GET', 'POST'])
 def AdminLogin():
@@ -130,6 +150,8 @@ def Register():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def Dashboard():
+
+    show = False    
     if 'Clogged_in' in session:
         customer_id = session['customerID']
         
@@ -171,6 +193,8 @@ def Dashboard():
     else:
         return redirect(url_for('Login'))
 
+
+
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 def AdminDashboard():
     if 'Alogged_in' in session:
@@ -186,7 +210,7 @@ def AdminUsers():
         con = mysql.connect()
         cur = con.cursor()
         
-        cur.execute("SELECT * FROM customer")
+        cur.execute("SELECT * FROM `customer`")
         data = cur.fetchall() 
         
         cur.close()
@@ -214,38 +238,12 @@ def AdminUsers():
         return render_template('adminUsers.html', users=users_list)
     else:
         return redirect(url_for('AdminLogin'))
+
+@app.route('/logout')
+def Logout():
+    session.clear()
     
-@app.route('/admin/transactionsList')
-def AdminTransactions():
-    role = session.get('role')
-    if 'Alogged_in' in session and role and role.lower() == 'admin': 
-        
-        con = mysql.connect()
-        cur = con.cursor()
-        
-        cur.execute("SELECT * FROM RENTAL_AGREEMENT")
-        data = cur.fetchall()
-        
-        cur.close()
-        con.close() 
-
-        trans_list = []
-        for row in data:
-            item = {
-                'rental_id': row[0],
-                'start_date': row[1],
-                'end_date': row[2],
-                'rate': row[3],
-                'cost': row[4],
-                'customer_id': row[5], 
-                'car_id': row[6]       
-            }
-            trans_list.append(item)
-
-        return render_template('adminTransactions.html', transactions=trans_list)
-    else:
-        return redirect(url_for('AdminLogin'))
-
+    return redirect(url_for('Index'))
 
 @app.route('/cars')
 def AvailableCars():
@@ -254,28 +252,7 @@ def AvailableCars():
         con = mysql.connect()
         cur = con.cursor()
         
-        search = request.args.get('search', '')
-        selected_status =  request.args.getlist('status')
-
-        query = "SELECT CAR.CarID, CAR.LicensePlateNumber, CAR.Model, CAR.Brand, CAR.Category, CAR.YearOfManufacture, CAR.RentalStatus,RENTAL_BRANCH.City, RENTAL_BRANCH.State, RENTAL_BRANCH.Zip_Code, RENTAL_BRANCH.Street_Address FROM CAR JOIN RENTAL_BRANCH ON CAR.BranchID = RENTAL_BRANCH.BranchID"
-
-        conditions = []
-        parameters = []
-
-        if search:
-            like = f"%{search}%"
-            conditions.append("(CAR.Brand LIKE %s OR CAR.Model LIKE %s OR CAR.Category LIKE %s OR CAR.YearOfManufacture LIKE %s)")
-            parameters.extend([like, like, like, like])
-
-        if selected_status:
-            t = ",".join(["%s"] * len(selected_status))
-            conditions.append(f"CAR.RentalStatus IN ({t})")
-            parameters.extend(selected_status)
-
-        if conditions: 
-            query += " WHERE " + " AND ".join(conditions)
-
-        cur.execute(query, parameters)
+        cur.execute("SELECT * FROM car WHERE RentalStatus = 'available'")
         data = cur.fetchall()
         cur.close()
         con.close()
@@ -290,7 +267,6 @@ def AvailableCars():
                 'category': row[4],
                 'year': row[5],
                 'status': row[6],
-                'location': f" {row[10]}, {row[7]}, {row[8]} {row[9]}"
             }
 
             cars_list.append(car_dict)
@@ -298,6 +274,8 @@ def AvailableCars():
         return render_template('cars.html', cars=cars_list)
     else:
         return redirect(url_for('Login'))
+    
+
 
 @app.route('/rent/<int:car_id>', methods=['GET', 'POST'])
 def RentCar(car_id):
@@ -316,7 +294,7 @@ def RentCar(car_id):
             'category': car_data[4]
         }
         
-        daily_rate = 100
+        daily_rate = 60
 
         if request.method == 'POST':
             startDay_String = request.form['startDate']
@@ -333,6 +311,7 @@ def RentCar(car_id):
                 error = "End date must be after start date!"
                 return render_template('rentCar.html',car=car_obj, rate=daily_rate, error=error)           
              
+            daily_rate=100
             total_cost = days * daily_rate
 
             cur.execute("INSERT INTO RENTAL_AGREEMENT(Start_Date, End_Date, DailyRate, TotalCost, CustomerID, CarID) VALUES (%s, %s, %s, %s, %s, %s)", (startDay_String, endDay_String, daily_rate, total_cost, customer_id, car_id))
@@ -352,12 +331,6 @@ def RentCar(car_id):
     else:
         return redirect(url_for('Login'))
     
-
-@app.route('/logout')
-def Logout():
-    session.clear()
-    
-    return redirect(url_for('Index'))
-    
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode
+

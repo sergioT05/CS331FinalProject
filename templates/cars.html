@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Cars</title>
+    <title>Available Cars</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
 </head>
 
@@ -13,52 +13,29 @@
     <nav>
         <div class="nav-links">
             <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
         </div>
     </nav>
 
 
-    <div class="dashboard-container">
+    <div class="container">
         <h1>Rent a Car!</h1>
-        <form action="/cars" method="GET" class="search-container">
-            <input type="search" name="search" placeholder="Search for car"
-                value="{{ request.args.get('search', '') }}">
-            <label>
-                <input type="checkbox" name="status" value="available" {% if 'available' in
-                    request.args.getlist('status') %}checked{% endif %}> Available
-            </label>
-            <label>
-                <input type="checkbox" name="status" value="rented" {% if 'rented' in request.args.getlist('status')
-                    %}checked{% endif %}> Rented
-            </label>
-            <label>
-                <input type="checkbox" name="status" value="under maintenance" {% if 'under maintenance' in
-                    request.args.getlist('status') %}checked{% endif %}> Under Maintenance
-            </label>
-            <button type="submit">Search</button>
-        </form>
 
         <div class="car-grid">
 
             {% for car in cars %}
             <div class="car-card">
+                <div class="car-image-box">
+                    <h3>{{ car.brand }} Picture</h3>
+                </div>
+
                 <div class="car-info">
                     <h2>{{ car.brand }} {{ car.model }}</h2>
                     <p>Year: {{ car.year }}</p>
                     <p>Type: {{ car.category }}</p>
-                    <p>Branch Location: {{ car.location}} </p>
+                    <p class="status">{{ car.status }}</p>
 
-                    <p class="status">Status: {{ car.status }}</p>
-
-                    {% if car.status.lower() == 'available' %}
-                    <a href="{{ url_for('RentCar', car_id=car.carID) }}" class="rent-button">Rent Now</a>
-
-                    {% elif car.status.lower()=='rented' %}
-                    <button class="disabled-button" disabled>Rented</button>
-
-                    {% elif car.status.lower()=='under maintenance' %}
-                    <button class="disabled-button" disabled>Under Maintenance</button>
-
-                    {% endif %}
+                    <a href="{{ url_for('RentCar', car_id=car.carID) }}" class=" rent-button">Rent Now</a>
                 </div>
             </div>
             {% endfor %}
