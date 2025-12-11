@@ -118,9 +118,9 @@ INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, 
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
  VALUES ('YTE-243', 'Bronco', 'Ford', 'SUV', 2022, 'available', 1);
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
- VALUES ('EIO-362', 'Civic', 'Honda', 'Sedan', 2025, 'available', 1);
+ VALUES ('EIO-362', 'Civic', 'Honda', 'Sedan', 2025, 'available', 3);
  INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
- VALUES ('JKL-001', 'Camry', 'Toyota', 'Sedan', 2023, 'available', 1);
+ VALUES ('JKL-001', 'Camry', 'Toyota', 'Sedan', 2023, 'available', 2);
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
  VALUES ('JKL-002', 'Corolla', 'Toyota', 'Sedan', 2022, 'available', 1);
 INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
@@ -173,3 +173,17 @@ INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, 
 
 INSERT INTO CUSTOMER(CustomerID, C_FName,C_LName,DateOfBirth,Phone,Email,Password,Street_Address, City,State, Zip_Code) 
 VALUES ('987651','Keanu', 'Reeves', '1964-09-02', '555-1005', 'keanu.reeves@email.com', 'matrix', '654 Cedar Td', 'Hollywood', 'CA', '90028');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('8575785', 'Mark', 'Phillips', '1994-09-16', '555-0001', 'mark@rdcworld.com', 'cashmoney', '123 Dream St', 'Waco', 'TX', '76706');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('868798', 'Leland', 'Manigo', '1995-01-01', '555-0002', 'leland@rdcworld.com', 'mickymouse', '456 Lee Blvd', 'Waco', 'TX', '76706');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('45454', 'Desmond', 'Johnson', '1993-05-10', '555-0003', 'desmond@rdcworld.com', 'old', '789 Ben Dr', 'Waco', 'TX', '76706');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('3535235', 'Cristiano', 'Ronaldo', '1985-02-05', '555-0007', 'cr7@goat.com', 'siuuuuu', '7 Al Nassr Way', 'Miami', 'FL', '33101');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('5235236', 'Lionel', 'Messi', '1987-06-24', '555-0010', 'leo@goat.com', 'worldcup22', '10 Inter Miami Rd', 'Miami', 'FL', '33101');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('3773490', 'Bruno', 'Fernandes', '1994-09-08', '555-0018', 'bruno@manutd.com', 'magnifico', '8 Trafford Park', 'New York', 'NY', '10011');
+INSERT INTO CUSTOMER (CustomerID, C_FName, C_LName, DateOfBirth, Phone, Email, Password, Street_Address, City, State, Zip_Code) 
+VALUES ('333', 'Benjamin', 'Reichwald', '1994-04-09', '555-0333', 'bladee@drain.com', 'icedancer', '9 Rainworld St', 'Stockholm', 'NY', '10001');
